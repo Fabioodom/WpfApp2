@@ -1,28 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace WpfApp2
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        // Método para actualizar la UI y habilitar/deshabilitar el botón
+        private void TextChanged_UpdateUI(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            lblNombrePreview.Text = txtNombre.Text;
+            lblTelefonoPreview.Text = txtTelefono.Text;
+
+            // Habilita el botón solo si ambas cajas de texto tienen contenido
+            btnGuardar.IsEnabled = !string.IsNullOrWhiteSpace(txtNombre.Text) &&
+                                   !string.IsNullOrWhiteSpace(txtTelefono.Text);
+        }
+
+        // Método para guardar en XML
+        private void GuardarEnXML(object sender, RoutedEventArgs e)
+        {
+            string nombre = txtNombre.Text;
+            string telefono = txtTelefono.Text;
+            string filePath = "contactos.xml";
+
+            XDocument doc;
+
+            // Si el archivo XML ya existe, lo cargamos; si no, lo creamos
+            if (File.Exists(filePath))
+            {
+                doc = XDocument.Load(filePath);
+            }
+            else
+            {
+                doc = new XDocument(new XElement("Contactos"));
+            }
+
+            // Crear nuevo elemento de contacto
+            XElement nuevoContacto = new XElement("Contacto",
+                new XElement("Nombre", nombre),
+                new XElement("Telefono", telefono));
+
+            doc.Root.Add(nuevoContacto);
+            doc.Save(filePath);
+
+            MessageBox.Show("Contacto guardado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
