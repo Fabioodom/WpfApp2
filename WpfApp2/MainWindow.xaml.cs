@@ -12,18 +12,18 @@ namespace WpfApp2
             InitializeComponent();
         }
 
-        // Método para actualizar la UI y habilitar/deshabilitar el botón
+       
         private void TextChanged_UpdateUI(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             lblNombrePreview.Text = txtNombre.Text;
             lblTelefonoPreview.Text = txtTelefono.Text;
 
-            // Habilita el botón solo si ambas cajas de texto tienen contenido
+            
             btnGuardar.IsEnabled = !string.IsNullOrWhiteSpace(txtNombre.Text) &&
                                    !string.IsNullOrWhiteSpace(txtTelefono.Text);
         }
 
-        // Método para guardar en XML
+       
         private void GuardarEnXML(object sender, RoutedEventArgs e)
         {
             string nombre = txtNombre.Text;
@@ -42,7 +42,7 @@ namespace WpfApp2
                 doc = new XDocument(new XElement("Contactos"));
             }
 
-            // Crear nuevo elemento de contacto
+            
             XElement nuevoContacto = new XElement("Contacto",
                 new XElement("Nombre", nombre),
                 new XElement("Telefono", telefono));

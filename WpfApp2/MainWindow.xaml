@@ -16,24 +16,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Nombre -->
+        
         <TextBlock Text="Nombre:" VerticalAlignment="Center" Margin="10"/>
         <TextBox Grid.Column="1" Name="txtNombre" Width="200" Margin="10"
                  TextChanged="TextChanged_UpdateUI"/>
 
-        <!-- Número de Teléfono -->
+        
         <TextBlock Grid.Row="1" Text="Teléfono:" VerticalAlignment="Center" Margin="10"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="txtTelefono" Width="200" Margin="10"
                  TextChanged="TextChanged_UpdateUI"/>
 
-        <!-- Etiquetas que muestran el texto ingresado -->
+        
         <TextBlock Grid.Row="2" Text="Vista Previa:" FontWeight="Bold" Margin="10"/>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
             <TextBlock Name="lblNombrePreview" FontSize="14" Margin="5"/>
             <TextBlock Name="lblTelefonoPreview" FontSize="14" Margin="5"/>
         </StackPanel>
 
-        <!-- Botón Guardar -->
+        
         <Button Grid.Row="3" Grid.Column="1" Name="btnGuardar" Content="Guardar en XML"
                 Width="200" Margin="10" Click="GuardarEnXML" IsEnabled="False"/>
     </Grid>
